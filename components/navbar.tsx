@@ -1,16 +1,30 @@
 "use client";
 
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { FaEthereum } from "react-icons/fa6";
-import { useAccount } from "wagmi";
-import { motion } from "framer-motion";
-import { navbar } from "@/animations";
+// next hooks and components
 import Link from "next/link";
+
+// framer motion
+import { motion } from "framer-motion";
+
+// animations
+import { navbar } from "@/animations";
+
+// icons
 import { GrDashboard } from "react-icons/gr";
+import { FaEthereum } from "react-icons/fa6";
+
+// components
+import IsWalletConnected from "@/components/shared/is-wallet-connected";
+import IsWalletDisconnected from "@/components/shared/is-wallet-disconnected";
+import WalletConnect from "@/components/blockchain/wallet-connect";
+
+// Siwe components...
+import { ButtonSIWELogin } from "@/siwe/components/siwe-button";
+import { IsSignedIn } from "@/siwe/components/is-signed-in";
+import { IsSignedOut } from "@/siwe/components/is-signed-out";
+import { ButtonSIWELogout } from "@/siwe/components/button-siwe-logout";
 
 const Navbar = () => {
-  const { isConnected } = useAccount();
-
   return (
     <motion.nav
       initial={navbar.initial}
@@ -26,12 +40,27 @@ const Navbar = () => {
 
         {/* items */}
         <div className="flex gap-x-3 items-center">
-          <Link href="/dashboard" className="flex items-center gap-x-2 hover:text-primary duration-200
-          ">
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-x-2 hover:text-primary duration-200
+          "
+          >
             <span className="sm:block hidden">Dashboard</span>
-            <GrDashboard className="" />    
-        </Link>
-          {isConnected ? <ConnectButton /> : null}
+            <GrDashboard className="" />
+          </Link>
+          <IsWalletConnected>
+            <WalletConnect />
+            <IsSignedIn>
+              <ButtonSIWELogout />
+            </IsSignedIn>
+            <IsSignedOut>
+              <ButtonSIWELogin />
+            </IsSignedOut>
+          </IsWalletConnected>
+
+          <IsWalletDisconnected>
+            <WalletConnect />
+          </IsWalletDisconnected>
         </div>
       </div>
     </motion.nav>

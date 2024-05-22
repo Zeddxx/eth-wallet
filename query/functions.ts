@@ -1,12 +1,10 @@
 import { IResults, ITransactions } from "@/types";
 import axios from "axios";
 
-export async function getTransactions(
-  pageParam = 1,
-  address: `0x${string}` | undefined
-) {
+export async function getTransactions({ pageParam = 1, address }: { pageParam: number,address: `0x${string}` | undefined}) {
   try {
     if (!address) return;
+
     const { data } = await axios.get(`https://api.etherscan.io/api`, {
       params: {
         module: "account",
@@ -20,7 +18,8 @@ export async function getTransactions(
         apiKey: "7UY4JCAXTESKSX7U4MKJ4SHRT3MG8GRRR3",
       },
     });
-    return data.results as IResults[];
+
+    return data.result as IResults[];
   } catch (error) {
     console.log(error);
     throw Error;

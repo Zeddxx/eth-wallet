@@ -1,12 +1,25 @@
 "use client";
 
-import { heading } from "@/animations";
-import { motion } from "framer-motion";
-import Button from "./ui/button";
+// wagmi provider
 import { useAccount } from "wagmi";
 
+// framer motions...
+import { heading } from "@/animations";
+import { motion } from "framer-motion";
+
+// shared components...
+import Button from "@/components/ui/button";
+import WalletConnect from "@/components/blockchain/wallet-connect";
+import IsWalletConnected from "@/components/shared/is-wallet-connected";
+
+// siwe components...
+import { ButtonSIWELogin } from "@/siwe/components/siwe-button";
+import { IsSignedOut } from "@/siwe/components/is-signed-out";
+import { IsSignedIn } from "@/siwe/components/is-signed-in";
+import { ButtonSIWELogout } from "@/siwe/components/button-siwe-logout";
+
 const HeroSection = () => {
-  const { isConnected } = useAccount()
+  const { isConnected } = useAccount();
   return (
     <motion.div
       initial={heading.initial}
@@ -27,7 +40,20 @@ const HeroSection = () => {
         <Button className="flex-1 text-sm" variant="primary">
           Get Started.
         </Button>
-        <Button disabled={!isConnected} className="flex-1 text-sm" variant="outline">
+        <IsWalletConnected>
+          <IsSignedIn>
+            <WalletConnect />
+            <ButtonSIWELogout />
+          </IsSignedIn>
+          <IsSignedOut>
+            <ButtonSIWELogin />
+          </IsSignedOut>
+        </IsWalletConnected>
+        <Button
+          disabled={!isConnected}
+          className="flex-1 text-sm"
+          variant="outline"
+        >
           Dashboard
         </Button>
       </div>

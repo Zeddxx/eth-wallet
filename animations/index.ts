@@ -28,3 +28,8 @@ export const navbar = {
     ease: "easeInOut",
   },
 } satisfies MotionProps;
+
+export const CardVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};

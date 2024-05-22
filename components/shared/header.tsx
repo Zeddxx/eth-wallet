@@ -1,35 +1,34 @@
 "use client";
 
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { DashboardItems } from "@/constants";
 import { cn } from "@/lib/utils/cn";
 import { RootState } from "@/redux/store";
 import { setIsMenuOpen, setTab } from "@/redux/utils";
-import React from "react";
-import { FiMenu } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
 
 const Aside = () => {
-  const { isMenuOpen, tab } = useSelector((state: RootState) => state.setUtils);
   const dispatch = useDispatch();
+  const { tab } = useSelector((state: RootState) => state.setUtils);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(setIsMenuOpen(false));
   }, [tab, dispatch]);
 
   return (
-    <header className="border-b sticky top-16 container bg-black-100 border-muted w-full">
+    <header className="sticky top-16 z-40 w-full container border-b border-muted bg-black-100">
       <div className="p-4">
-        <div className="flex gap-x-4 items-center">
-          {DashboardItems.map(({ item, title, icon, value }) => (
+        <div className="flex items-center gap-x-4">
+          {DashboardItems.map(({ item, title, value }) => (
             <div
-              onClick={() => dispatch(setTab(value))}
-              title={title}
-              className="cursor-pointer w-full"
               key={item}
+              title={title}
+              onClick={() => dispatch(setTab(value))}
+              className="w-full cursor-pointer"
             >
               <p
                 className={cn(
-                  "px-4 py-2 border border-muted flex items-center text-xs rounded",
+                  "flex items-center px-4 py-2 text-xs border border-muted rounded",
                   tab === value ? "bg-black-300" : "bg-black-100"
                 )}
               >
@@ -42,4 +41,5 @@ const Aside = () => {
     </header>
   );
 };
+
 export default Aside;

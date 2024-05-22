@@ -23,7 +23,8 @@ const Button: React.FC<ButtonProps> = ({
     secondary:
       "bg-secondary hover:bg-secondary/80 transition-colors duration-200 disabled:opacity-40 text-white rounded",
     link: "underline transition-colors text-primary hover:opacity-90 duration-200 underline-offset-2",
-    outline: "border transition-colors rounded border-muted text-white disabled:opacity-50 bg-transparent hover:bg-stone-950 duration-300"
+    outline:
+      "border transition-colors rounded border-muted text-white disabled:opacity-50 bg-transparent hover:bg-stone-950 duration-300",
   };
 
   return (

@@ -1,12 +1,12 @@
 import { ChildrenProps } from "@/types";
-import Aside from "./dashboard/_components/aside";
+import Header from "@/components/shared/header";
 import Navbar from "@/components/navbar";
 
 export default function MainRootLayout({ children }: ChildrenProps) {
   return (
     <>
       <Navbar />
-      <Aside />
+      <Header />
       <main className="w-full container overflow-hidden">
         <div className="w-full px-4">{children}</div>
       </main>

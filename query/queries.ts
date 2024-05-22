@@ -1,12 +1,39 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getBalance, getTransactions } from "./api-function";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { getBalance, getTransactions } from "@/query/functions";
 
-export const useGetTransactions = (address: `0x${string}` | undefined) => {
+export const useGetTransactions = (
+  pageParam: number,
+  address: `0x${string}` | undefined
+) => {
   return useQuery({
-    queryKey: ["transactions"],
-    queryFn: () => getTransactions(1, address),
+    queryKey: ["transaction"],
+    queryFn: () => getTransactions({ pageParam, address }),
+  });
+};
+
+export const useInfiniteTransactions = ({
+  address,
+}: {
+  address: `0x${string}`;
+}) => {
+  return useInfiniteQuery({
+    queryKey: ["transactions", address],
+    queryFn: ({ pageParam }) => getTransactions({ pageParam, address }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      if (lastPage?.length === 0) {
+        return undefined;
+      }
+      return lastPageParam + 1;
+    },
+    getPreviousPageParam: (firstPage, allPages, firstPageParam) => {
+      if (firstPageParam <= 1) {
+        return undefined;
+      }
+      return firstPageParam - 1;
+    },
   });
 };
 
