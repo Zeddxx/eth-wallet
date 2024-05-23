@@ -1,8 +1,5 @@
 "use client";
 
-// next hooks and components
-import Link from "next/link";
-
 // framer motion
 import { motion } from "framer-motion";
 
@@ -10,12 +7,10 @@ import { motion } from "framer-motion";
 import { navbar } from "@/animations";
 
 // icons
-import { GrDashboard } from "react-icons/gr";
 import { FaEthereum } from "react-icons/fa6";
+import { IoIosMenu } from "react-icons/io";
 
 // components
-import IsWalletConnected from "@/components/shared/is-wallet-connected";
-import IsWalletDisconnected from "@/components/shared/is-wallet-disconnected";
 import WalletConnect from "@/components/blockchain/wallet-connect";
 
 // Siwe components...
@@ -23,38 +18,79 @@ import { ButtonSIWELogin } from "@/siwe/components/siwe-button";
 import { IsSignedIn } from "@/siwe/components/is-signed-in";
 import { IsSignedOut } from "@/siwe/components/is-signed-out";
 import { ButtonSIWELogout } from "@/siwe/components/button-siwe-logout";
+import { Content, ContentTrigger } from "./shared/menu/menu-component";
+import { DashboardItems } from "@/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsMenuOpen, setTab } from "@/redux/utils";
+import { cn } from "@/lib/utils/cn";
+import { RootState } from "@/redux/store";
+import IsWalletConnected from "./shared/is-wallet-connected";
+import IsWalletDisconnected from "./shared/is-wallet-disconnected";
 
 const Navbar = () => {
+  const { tab } = useSelector((state: RootState) => state.setUtils);
+  const dispatch = useDispatch();
+
   return (
     <motion.nav
       initial={navbar.initial}
       animate={navbar.animate}
       transition={navbar.transition}
-      className="w-full sticky top-0 bg-black-100 z-20"
+      className="w-full sticky top-0 border-b border-muted bg-black-100 z-20"
     >
       <div className="flex container px-4 items-center w-full justify-between h-16">
-        {/* logo */}
-        <div className="h-10 w-10 grid place-items-center rounded border-muted border">
-          <FaEthereum className="h-4 w-4" />
+        <div className="flex gap-x-2">
+          <ContentTrigger>
+            <IoIosMenu className="h-6 w-6" />
+          </ContentTrigger>
+          <Content className="flex flex-col justify-between">
+            <div className="space-y-2">
+              {DashboardItems.map(({ item, title, value }) => (
+                <div
+                  onClick={() => {
+                    dispatch(setTab(value));
+                    dispatch(setIsMenuOpen(false));
+                  }}
+                  key={value}
+                  title={title}
+                  className="py-3 cursor-pointer group hover:bg-muted px-2 border border-muted rounded"
+                >
+                  <p
+                    className={cn(
+                      "text-pretty group-hover:text-white",
+                      tab === value ? "text-white" : "text-muted-foreground"
+                    )}
+                  >
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <IsWalletConnected>
+              <IsSignedOut>
+                <ButtonSIWELogin />
+              </IsSignedOut>
+              <IsSignedIn>
+                <ButtonSIWELogout />
+              </IsSignedIn>
+            </IsWalletConnected>
+          </Content>
+          {/* logo */}
+          <div className="h-10 w-10 grid place-items-center rounded border-muted border">
+            <FaEthereum className="h-4 w-4" />
+          </div>
         </div>
 
         {/* items */}
         <div className="flex gap-x-3 items-center">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-x-2 hover:text-primary duration-200
-          "
-          >
-            <span className="sm:block hidden">Dashboard</span>
-            <GrDashboard className="" />
-          </Link>
           <IsWalletConnected>
-            <WalletConnect />
             <IsSignedIn>
-              <ButtonSIWELogout />
+              <WalletConnect />
+              <ButtonSIWELogout className="hidden" />
             </IsSignedIn>
             <IsSignedOut>
-              <ButtonSIWELogin />
+              <ButtonSIWELogin className="hidden sm:block" />
             </IsSignedOut>
           </IsWalletConnected>
 

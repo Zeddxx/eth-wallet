@@ -16,7 +16,7 @@ const Aside = () => {
   }, [tab, dispatch]);
 
   return (
-    <header className="sticky top-16 z-40 w-full container border-b border-muted bg-black-100">
+    <header className="sticky top-16 z-10 w-full container border-b border-muted bg-black-100">
       <div className="p-4">
         <div className="flex items-center gap-x-4">
           {DashboardItems.map(({ item, title, value }) => (

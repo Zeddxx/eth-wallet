@@ -3,7 +3,7 @@
 import { IResults } from "@/types";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaBullseye, FaEye } from "react-icons/fa6";
+import { FaEye } from "react-icons/fa6";
 import { CardVariants } from "@/animations";
 import CardModal from "@/components/shared/card-modal";
 
@@ -59,8 +59,8 @@ const Card = ({ item }: CardProps) => {
         )}
         <div className="w-full sm:min-h-44 min-h-32 bg-muted"></div>
         <div className="space-y-3 p-4">
-          <p className="p-2 rounded border border-muted w-fit">
-            <FaBullseye />
+          <p onClick={() => setShowModal(true)} className="p-2 rounded border border-muted w-fit cursor-pointer">
+            <FaEye />
           </p>
           <p className="w-full truncate" title={item.from}>
             From: {item.from}
@@ -75,7 +75,11 @@ const Card = ({ item }: CardProps) => {
       </motion.div>
 
       {showModal && (
-        <CardModal item={item} setShowModal={setShowModal} onClose={() => setShowModal(false)} />
+        <CardModal
+          item={item}
+          setShowModal={setShowModal}
+          onClose={() => setShowModal(false)}
+        />
       )}
     </>
   );

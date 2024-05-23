@@ -3,9 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { WrapProvider } from "@/components/providers/wrap-provider";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { ReduxProvider } from "@/components/providers/redux-provider";
-import ConnectWallet from "@/components/connect-wallet";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,11 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} antialiased bg-black-100 min-h-[100dvh] relative`}
+        className={`${inter.className} antialiased dark bg-black-100 min-h-[100dvh] relative`}
       >
         <WrapProvider>
-          <div className="">{children}</div>
-          <ConnectWallet />
+            <div className="">{children}</div>
         </WrapProvider>
       </body>
     </html>

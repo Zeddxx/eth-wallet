@@ -37,9 +37,6 @@ const HeroSection = () => {
       </p>
 
       <div className="flex sm:flex-row flex-col gap-3 justify-center w-full max-w-4xl mx-auto">
-        <Button className="flex-1 text-sm" variant="primary">
-          Get Started.
-        </Button>
         <IsWalletConnected>
           <IsSignedIn>
             <WalletConnect />
@@ -49,13 +46,6 @@ const HeroSection = () => {
             <ButtonSIWELogin />
           </IsSignedOut>
         </IsWalletConnected>
-        <Button
-          disabled={!isConnected}
-          className="flex-1 text-sm"
-          variant="outline"
-        >
-          Dashboard
-        </Button>
       </div>
     </motion.div>
   );

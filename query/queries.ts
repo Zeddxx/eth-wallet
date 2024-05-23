@@ -3,16 +3,6 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { getBalance, getTransactions } from "@/query/functions";
 
-export const useGetTransactions = (
-  pageParam: number,
-  address: `0x${string}` | undefined
-) => {
-  return useQuery({
-    queryKey: ["transaction"],
-    queryFn: () => getTransactions({ pageParam, address }),
-  });
-};
-
 export const useInfiniteTransactions = ({
   address,
 }: {
