@@ -72,16 +72,6 @@ const Navbar = () => {
 
         {/* items */}
         <div className="flex gap-x-3 items-center">
-          <IsWalletConnected>
-            <Link
-              href="/dashboard"
-              className="text-muted-foreground underline underline-offset-2 hover:text-white duration-200"
-              title="dashboard"
-            >
-              Dashboard
-            </Link>
-          </IsWalletConnected>
-
           <WalletConnect />
         </div>
       </div>
