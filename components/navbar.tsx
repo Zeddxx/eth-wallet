@@ -36,7 +36,7 @@ const Navbar = () => {
       initial={navbar.initial}
       animate={navbar.animate}
       transition={navbar.transition}
-      className="w-full sticky top-0 border-b border-muted bg-black-100 z-20"
+      className="w-full sticky top-0 border-b border-muted bg-black z-20"
     >
       <div className="flex container px-4 items-center w-full justify-between h-16">
         <div className="flex gap-x-2">

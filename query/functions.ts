@@ -1,7 +1,15 @@
-import { IResults, ITransactions } from "@/types";
+import { IResults } from "@/types";
 import axios from "axios";
 
-export async function getTransactions({ pageParam = 1, address }: { pageParam: number,address: `0x${string}` | undefined}) {
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
+export async function getTransactions({
+  pageParam = 1,
+  address,
+}: {
+  pageParam: number;
+  address: `0x${string}` | undefined;
+}) {
   try {
     if (!address) return;
 
@@ -15,7 +23,7 @@ export async function getTransactions({ pageParam = 1, address }: { pageParam: n
         page: pageParam,
         offset: 12,
         sort: "asc",
-        apiKey: "7UY4JCAXTESKSX7U4MKJ4SHRT3MG8GRRR3",
+        apiKey: API_KEY,
       },
     });
 
@@ -29,9 +37,15 @@ export async function getTransactions({ pageParam = 1, address }: { pageParam: n
 export async function getBalance(address: `0x${string}` | undefined) {
   try {
     if (!address) return;
-    const { data } = await axios.get(
-      `https://api.etherscan.io/api?module=account&action=balance&address=${address}&tag=latest&apikey=7UY4JCAXTESKSX7U4MKJ4SHRT3MG8GRRR3`
-    );
+    const { data } = await axios.get(`https://api.etherscan.io/api`, {
+      params: {
+        module: "account",
+        action: "balance",
+        address: address,
+        tag: "latest",
+        apikey: API_KEY,
+      },
+    });
     return data;
   } catch (error) {
     console.log(error);

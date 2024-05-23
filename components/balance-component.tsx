@@ -1,7 +1,6 @@
 "use client";
 
 import { useGetAccountBalance } from "@/query/queries";
-import { CgHello } from "react-icons/cg";
 import { useAccount } from "wagmi";
 import { motion } from "framer-motion";
 import { CardVariants } from "@/animations";
@@ -30,7 +29,7 @@ const BalanceComponent = ({
       className="w-max flex flex-col items-center space-y-2"
     >
       <h1 className="h1 flex items-center gap-x-2">
-        Hi, User! <CgHello />
+        Hi, User! 👋
       </h1>
       <p className="max-w-sm truncate p-2 rounded border text-sm border-muted bg-muted">{signature}</p>
       <h2 className="h1 p-6 border border-muted rounded">

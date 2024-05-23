@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} antialiased dark bg-black-100 min-h-[100dvh] relative`}
+        className={`${inter.className} antialiased dark bg-black min-h-[100dvh] relative`}
       >
         <WrapProvider>
             <div className="">{children}</div>
