@@ -10,6 +10,7 @@ import { useAccount } from "wagmi";
 // components imports...
 import BalanceComponent from "@/components/balance-component";
 import Transactions from "@/components/transactions";
+import UserTransaction from "@/components/user-transaction";
 
 const Dashboard = () => {
   const { isConnected, address, isConnecting } = useAccount();
@@ -26,8 +27,8 @@ const Dashboard = () => {
         <div className="max-w-sm mt-4 text-muted-foreground space-y-3 text-start">
           <ul className="text-xs space-y-3 list-disc pl-6">
             <li>
-              You can simply connect your account by clicking on the top right button
-              right button.
+              You can simply connect your account by clicking on the top right
+              button right button.
             </li>
             <li>After connecting to your account you can see {tab} here.</li>
           </ul>
@@ -45,7 +46,7 @@ const Dashboard = () => {
       )}
       {tab === "transactions" && (
         <div className="my-5">
-          <Transactions address={address} />
+          <UserTransaction address={address} />
         </div>
       )}
       {tab === "history" && (
