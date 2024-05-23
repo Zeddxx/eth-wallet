@@ -9,7 +9,7 @@ const WalletConnect = ({
   return (
     <span className={className} {...props}>
       <ConnectButton
-        showBalance={false}
+        showBalance={true}
         accountStatus={{
           smallScreen: "avatar",
           largeScreen: "avatar",

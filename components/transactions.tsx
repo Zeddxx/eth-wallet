@@ -12,7 +12,6 @@ const Transactions = ({ address }: { address: `0x${string}` | undefined }) => {
     useInfiniteTransactions({
       address: address!,
     });
-    console.log(data);
 
   if (error) return <div>Error loading transactions</div>;
   if (isLoading) return <div>Loading...</div>;

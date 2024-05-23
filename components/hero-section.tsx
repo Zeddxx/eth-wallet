@@ -1,25 +1,14 @@
 "use client";
 
-// wagmi provider
-import { useAccount } from "wagmi";
-
 // framer motions...
 import { heading } from "@/animations";
 import { motion } from "framer-motion";
 
 // shared components...
-import Button from "@/components/ui/button";
 import WalletConnect from "@/components/blockchain/wallet-connect";
 import IsWalletConnected from "@/components/shared/is-wallet-connected";
 
-// siwe components...
-import { ButtonSIWELogin } from "@/siwe/components/siwe-button";
-import { IsSignedOut } from "@/siwe/components/is-signed-out";
-import { IsSignedIn } from "@/siwe/components/is-signed-in";
-import { ButtonSIWELogout } from "@/siwe/components/button-siwe-logout";
-
 const HeroSection = () => {
-  const { isConnected } = useAccount();
   return (
     <motion.div
       initial={heading.initial}
@@ -38,13 +27,7 @@ const HeroSection = () => {
 
       <div className="flex sm:flex-row flex-col gap-3 justify-center w-full max-w-4xl mx-auto">
         <IsWalletConnected>
-          <IsSignedIn>
-            <WalletConnect />
-            <ButtonSIWELogout />
-          </IsSignedIn>
-          <IsSignedOut>
-            <ButtonSIWELogin />
-          </IsSignedOut>
+          <WalletConnect />
         </IsWalletConnected>
       </div>
     </motion.div>

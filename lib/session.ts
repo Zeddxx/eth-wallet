@@ -1,4 +1,4 @@
-import { IronSessionOptions } from "iron-session"
+import { SessionOptions as IronSessionOptions } from "iron-session"
 import type { SiweMessage } from "siwe"
 
 declare module "iron-session" {

@@ -28,10 +28,10 @@ const BalanceComponent = ({
       }}
       className="w-max flex flex-col items-center space-y-2"
     >
-      <h1 className="h1 flex items-center gap-x-2">
-        Hi, User! 👋
-      </h1>
-      <p className="max-w-sm truncate p-2 rounded border text-sm border-muted bg-muted">{signature}</p>
+      <h1 className="h1 flex items-center gap-x-2">Hi, User! 👋</h1>
+      <p className="max-w-sm truncate p-2 rounded border text-sm border-muted bg-muted">
+        {signature}
+      </p>
       <h2 className="h1 p-6 border border-muted rounded">
         {data.result} <span className="text-muted-foreground">ETH</span>
       </h2>

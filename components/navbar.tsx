@@ -14,10 +14,6 @@ import { IoIosMenu } from "react-icons/io";
 import WalletConnect from "@/components/blockchain/wallet-connect";
 
 // Siwe components...
-import { ButtonSIWELogin } from "@/siwe/components/siwe-button";
-import { IsSignedIn } from "@/siwe/components/is-signed-in";
-import { IsSignedOut } from "@/siwe/components/is-signed-out";
-import { ButtonSIWELogout } from "@/siwe/components/button-siwe-logout";
 import { Content, ContentTrigger } from "./shared/menu/menu-component";
 import { DashboardItems } from "@/constants";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +22,7 @@ import { cn } from "@/lib/utils/cn";
 import { RootState } from "@/redux/store";
 import IsWalletConnected from "./shared/is-wallet-connected";
 import IsWalletDisconnected from "./shared/is-wallet-disconnected";
+import Link from "next/link";
 
 const Navbar = () => {
   const { tab } = useSelector((state: RootState) => state.setUtils);
@@ -66,15 +63,6 @@ const Navbar = () => {
                 </div>
               ))}
             </div>
-
-            <IsWalletConnected>
-              <IsSignedOut>
-                <ButtonSIWELogin />
-              </IsSignedOut>
-              <IsSignedIn>
-                <ButtonSIWELogout />
-              </IsSignedIn>
-            </IsWalletConnected>
           </Content>
           {/* logo */}
           <div className="h-10 w-10 grid place-items-center rounded border-muted border">
@@ -85,18 +73,16 @@ const Navbar = () => {
         {/* items */}
         <div className="flex gap-x-3 items-center">
           <IsWalletConnected>
-            <IsSignedIn>
-              <WalletConnect />
-              <ButtonSIWELogout className="hidden" />
-            </IsSignedIn>
-            <IsSignedOut>
-              <ButtonSIWELogin className="hidden sm:block" />
-            </IsSignedOut>
+            <Link
+              href="/dashboard"
+              className="text-muted-foreground underline underline-offset-2 hover:text-white duration-200"
+              title="dashboard"
+            >
+              Dashboard
+            </Link>
           </IsWalletConnected>
 
-          <IsWalletDisconnected>
-            <WalletConnect />
-          </IsWalletDisconnected>
+          <WalletConnect />
         </div>
       </div>
     </motion.nav>

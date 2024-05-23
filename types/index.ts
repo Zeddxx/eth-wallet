@@ -25,3 +25,5 @@ export type ITransactions = {
     message: string
     result: IResults[]
 }
+
+export type IAuthStatus = "loading" | "unauthenticated" | "authenticated"
