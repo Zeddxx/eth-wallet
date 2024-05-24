@@ -3,10 +3,13 @@
 // framer motions...
 import { heading } from "@/animations";
 import { motion } from "framer-motion";
+import { signIn } from "next-auth/react";
 
 // shared components...
 import WalletConnect from "@/components/blockchain/wallet-connect";
 import IsWalletConnected from "@/components/shared/is-wallet-connected";
+import Button from "./ui/button";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 const HeroSection = () => {
   return (
@@ -29,6 +32,14 @@ const HeroSection = () => {
         <IsWalletConnected>
           <WalletConnect />
         </IsWalletConnected>
+        <Button
+          onClick={() =>
+            signIn("github", { callbackUrl: DEFAULT_LOGIN_REDIRECT })
+          }
+          variant="outline"
+        >
+          Github Sign in
+        </Button>
       </div>
     </motion.div>
   );

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { WrapProvider } from "@/components/providers/wrap-provider";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,9 +23,11 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased dark bg-black min-h-[100dvh] relative`}
       >
-        <WrapProvider>
+        <SessionProvider>
+          <WrapProvider>
             <div className="">{children}</div>
-        </WrapProvider>
+          </WrapProvider>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -20,13 +20,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsMenuOpen, setTab } from "@/redux/utils";
 import { cn } from "@/lib/utils/cn";
 import { RootState } from "@/redux/store";
-import IsWalletConnected from "./shared/is-wallet-connected";
-import IsWalletDisconnected from "./shared/is-wallet-disconnected";
-import Link from "next/link";
+import IsLoggedIn from "./auth/is-loggedin";
+import Logout from "./auth/logout";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const { tab } = useSelector((state: RootState) => state.setUtils);
   const dispatch = useDispatch();
+  const { data } = useSession()
+  console.log(data);
 
   return (
     <motion.nav
@@ -72,7 +74,13 @@ const Navbar = () => {
 
         {/* items */}
         <div className="flex gap-x-3 items-center">
-          <WalletConnect />
+          <IsLoggedIn>
+            <WalletConnect />
+          </IsLoggedIn>
+
+          <IsLoggedIn>
+            <Logout />
+          </IsLoggedIn>
         </div>
       </div>
     </motion.nav>
