@@ -22,13 +22,10 @@ import { cn } from "@/lib/utils/cn";
 import { RootState } from "@/redux/store";
 import IsLoggedIn from "./auth/is-loggedin";
 import Logout from "./auth/logout";
-import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const { tab } = useSelector((state: RootState) => state.setUtils);
   const dispatch = useDispatch();
-  const { data } = useSession()
-  console.log(data);
 
   return (
     <motion.nav

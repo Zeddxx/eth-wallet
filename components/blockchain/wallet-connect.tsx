@@ -1,6 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { HtmlHTMLAttributes } from "react";
-import "@rainbow-me/rainbowkit/styles.css"
+import "@rainbow-me/rainbowkit/styles.css";
 
 const WalletConnect = ({
   className,

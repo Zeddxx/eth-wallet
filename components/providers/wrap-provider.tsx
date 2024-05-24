@@ -26,6 +26,14 @@ export const WrapProvider = ({ children }: { children: React.ReactNode }) => {
   const [authStatus, setAuthStatus] =
     React.useState<IAuthStatus>("unauthenticated");
 
+    React.useEffect(() => {
+      if (typeof window !== "undefined") {
+        const storedStatus = localStorage.getItem("auth_status");
+        const status = storedStatus === "authenticated" ? "authenticated" : "unauthenticated";
+        setAuthStatus(status);
+      }
+    }, []);
+
   const router = useRouter();
 
   const authAdapter = React.useMemo(

@@ -7,9 +7,10 @@ import { signIn } from "next-auth/react";
 
 // shared components...
 import WalletConnect from "@/components/blockchain/wallet-connect";
-import IsWalletConnected from "@/components/shared/is-wallet-connected";
 import Button from "./ui/button";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import IsLoggedOut from "./auth/is-loggedout";
+import IsLoggedIn from "./auth/is-loggedin";
 
 const HeroSection = () => {
   return (
@@ -29,17 +30,19 @@ const HeroSection = () => {
       </p>
 
       <div className="flex sm:flex-row flex-col gap-3 justify-center w-full max-w-4xl mx-auto">
-        <IsWalletConnected>
+        <IsLoggedIn>
           <WalletConnect />
-        </IsWalletConnected>
-        <Button
-          onClick={() =>
-            signIn("github", { callbackUrl: DEFAULT_LOGIN_REDIRECT })
-          }
-          variant="outline"
-        >
-          Github Sign in
-        </Button>
+        </IsLoggedIn>
+        <IsLoggedOut>
+          <Button
+            onClick={() =>
+              signIn("github", { callbackUrl: DEFAULT_LOGIN_REDIRECT })
+            }
+            variant="outline"
+          >
+            Github Sign in
+          </Button>
+        </IsLoggedOut>
       </div>
     </motion.div>
   );

@@ -1,6 +1,5 @@
 import { createAuthenticationAdapter } from "@rainbow-me/rainbowkit";
 import React from "react";
-import { type useRouter as IRouter } from "next/navigation";
 import { SiweMessage } from "siwe";
 import { IAuthStatus } from "@/types";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
@@ -42,6 +41,7 @@ export const createAuthAdapter = ({ setAuthStatus, router }: IAdapterProps) =>
 
       if (verifyRes.ok) {
         setAuthStatus("authenticated");
+        localStorage.setItem("auth_status", "authenticated")
         router.push("/dashboard");
         return true;
       }
@@ -51,7 +51,6 @@ export const createAuthAdapter = ({ setAuthStatus, router }: IAdapterProps) =>
 
     signOut: async () => {
       await fetch("/api/siwe/logout");
-      setAuthStatus("unauthenticated");
-      router.push("/");
+      localStorage.setItem("auth_status", "unauthenticated")
     },
   });

@@ -13,6 +13,6 @@ const IsLoggedIn: React.FC<IsLoggedInProps> = ({ children, ...props }) => {
 
   if (status === "unauthenticated") return null;
 
-  return <div {...props}>{children}</div>;
+  return <div {...props}>{status === "loading" ? "Loading..." : children}</div>;
 };
 export default IsLoggedIn;
