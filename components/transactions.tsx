@@ -4,6 +4,7 @@ import { useInfiniteTransactions } from "@/query/queries";
 import Card from "@/components/shared/card";
 import MotionDiv from "@/components/animation/motion-div";
 import { motion } from "framer-motion";
+import ItemModal from "./item-modal";
 
 const Transactions = ({ address }: { address: `0x${string}` | undefined }) => {
   const { data, error, isLoading, fetchNextPage, hasNextPage } =
@@ -68,6 +69,8 @@ const Transactions = ({ address }: { address: `0x${string}` | undefined }) => {
           </motion.div>
         </div>
       )}
+
+      <ItemModal />
     </div>
   );
 };
